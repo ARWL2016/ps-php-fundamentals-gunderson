@@ -1,3 +1,21 @@
+<?php
+
+include 'assets/include.php'; 
+
+if(isset($_SESSION['formPostData'])) 
+{
+    $postedData = $_SESSION['formPostData']; 
+
+    // session_destroy(); - destroys all session data
+    unset($_SESSION['formPostData']); 
+}
+else 
+{
+    header('Location: index.php'); 
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,27 +32,27 @@
         <div id="Body">
             <div>
                 <label>Favorite Author:</label> 
-                <span> </span>
+                <span><?=$postedData['author']?></span>
             </div>		
             <div>
                 <label>Favorite Century:</label>
-                <span> </span>
+                <span><?=$postedData['century']?></span>
             </div>
             <div>
                 <label>Comments:</label>
-                <span> </span>
+                <span><?=$postedData['comments']?></span>
             </div>
             <div>
                 <label>Name:</label>
-                <span> </span>
+                <span><?=$postedData['name']?></span>
             </div>
             <div>
                 <label>E-mail Address:</label>
-                <span> </span>
+                <span><?=$postedData['email']?></span>
             </div>
             <div>
                 <label>Receive Newsletter:</label>
-                <span> </span>
+                <span><?=$postedData['newsletter']?></span>
             </div>
         </div>
 	</body>
