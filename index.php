@@ -1,17 +1,64 @@
+<?php 
+
+require 'assets/dbInfo.php'; 
+
+$query = "SELECT id, first_name, last_name, pen_name FROM Authors ORDER BY first_name";
+$resultObj = $connection->query($query); 
+
+?>
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+        <title>PHP Fundamentals</title>
+		<link href="assets/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
+		<div id="Header">
+			<img src="assets/Dickens_Gurney_head.jpg" border="0" alt="">
+			<h2>
+				Join Our Literature Mailing List!!
+			</h2>
+		</div>        
+        <div id="Body">
+            <form method="get" action="final.php" >
+                <div>
+                    <label>Favorite Author:</label>
+                    <select name="author">
+                        <?php while($row= $resultObj->fetch_assoc()) : ?>
+                        
+                        <option value="<?=$row['id']?>"><?=$row['first_name']?> <?=$row['last_name']?></option>
+                        <?php endWhile ?> 
+                    </select>
+                </div>		
+                <div class="multiple">
+                    <label>Favorite Century:</label>
+                    17th Century <input type="checkbox" name="century" value="17th">
+                    18th Century <input type="checkbox" name="century" value="18th"> 
+                    19th Century <input type="checkbox" name="century" value="19th"> 
+                </div>
+                <div>
+                    <label>Comments:</label>
+                    <textarea name="comments"></textarea>
+                </div>
+                <div>
+                    <label>Name:</label>
+                    <input type="text" name="name" />
+                </div>
+                <div>
+                    <label>E-mail Address:</label>
+                    <input type="text" name="email" />
+                </div>
+                <div  class="multiple">
+                    <label>Receive Newsletter:</label>
+                    Yes <input type="radio" name="newsletter" value="no">
+                    No <input type="radio" name="newsletter" value="yes">
+                </div>
+                <div class="multiple">
+                    <label>&nbsp;</label>
+                    <input type="submit" name="submit" value="Join Mailing List">
+                </div>
+            </form>
+        </div>
+	</body>
 </html>
